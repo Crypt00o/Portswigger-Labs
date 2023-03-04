@@ -1,4 +1,4 @@
-from requests import request
+fro  requests import request
 from bs4 import BeautifulSoup
 from random import randint
 from sys import argv
@@ -22,7 +22,7 @@ def send_reset_password_url(forgot_password_url,cookies,username):
             }
     print('POST '+forgot_password_url +'  '+data)
     res=request(url=forgot_password_url,method='POST',data=data,headers=headers)
-    return res
+
 
 def get_email_box_url(login_url,cookies):
     headers={
@@ -64,7 +64,7 @@ def set_new_passwrod(reset_url,cookies,reset_token,username,new_password):
         'Cookie':cookies,
         'X-Forwarded-For':generate_random_ip()
             }
-    data='temp-forgot-password-token='+reset_token+'&username='+username+'&new-password-1='+new_password+'&new-password-2='+new_password
+    data='temp-forgot-password-token='+reset_url+'&username='+username+'&new-password-1='+new_password+'&new-password-2='+new_password
     print('POST '+reset_token+'  '+data)
     res=request(url=reset_url,method='POST',headers=headers,data=data)
 
