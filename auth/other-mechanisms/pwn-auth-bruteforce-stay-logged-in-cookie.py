@@ -104,12 +104,12 @@ def pwn(url,attacker_username,attacker_password,username,password_wordlist):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : 
+    0xCrypt00o Soluation for Portswigger LAB :  Bruteforce-Stay-Logged-in-Cookie
         For More Soluation check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==6:
      pwn(argv[1],argv[2],argv[3],argv[4],argv[5])
  else:
-     print("call it with : ./pwn-auth-username-enumeration-via-different-responses.py <url> <attacker username> <attacker_password> <victime_username> <path to username wordlist> <path to password wordlist> ")
+     print("call it with : ./pwn-auth-bruteforce-stay-logged-in-cookie.py <url> <attacker username> <attacker_password> <victime_username> <path to password wordlist> ")
  
