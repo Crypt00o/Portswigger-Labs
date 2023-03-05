@@ -1,2 +1,2 @@
-# Here You Will find My Automated Soluation For PortSwigger Labs
+# Here You Will find My Automated Solution For PortSwigger Labs
 
