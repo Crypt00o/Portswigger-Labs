@@ -104,8 +104,8 @@ def pwn(url,attacker_username,attacker_password,username,password_wordlist):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB :  Bruteforce-Stay-Logged-in-Cookie
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB :  Bruteforce-Stay-Logged-in-Cookie
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==6:

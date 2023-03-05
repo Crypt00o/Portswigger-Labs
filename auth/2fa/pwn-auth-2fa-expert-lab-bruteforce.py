@@ -62,8 +62,8 @@ def bruteforce(url,username,password):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : 2FA bypass using a brute-force attack
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB : 2FA bypass using a brute-force attack
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==4:

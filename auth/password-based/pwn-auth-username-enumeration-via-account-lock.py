@@ -102,8 +102,8 @@ def pwn(url,username_wordlist_path,password_wordlist_path):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : Username-Enumeration-Via-Account-Lock
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB : Username-Enumeration-Via-Account-Lock
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==4:

@@ -58,8 +58,8 @@ def pwn(url,attacker_username,attacker_password,victime_username,password_list):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : Broken-Brute-Force-Protection-IP-Block
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB : Broken-Brute-Force-Protection-IP-Block
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==6:

@@ -102,8 +102,8 @@ def pwn(url,attacker_username,victim_username, new_password):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : Password-Reset-Broken-Logic
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB : Password-Reset-Broken-Logic
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==5:

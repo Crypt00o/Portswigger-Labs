@@ -75,8 +75,8 @@ def pwn(url,username_list,password_list):
 
 if __name__ == "__main__":
  print("""
-    0xCrypt00o Soluation for Portswigger LAB : Username-Enumeration-Via-Different-Responses-Times
-        For More Soluation check :
+    0xCrypt00o Solution for Portswigger LAB : Username-Enumeration-Via-Different-Responses-Times
+        For More Solutions check :
                 https://github.com/Crypt00o/Portswigger-Labs/
     """)
  if len(argv)==4:
